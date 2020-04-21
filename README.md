@@ -1,6 +1,8 @@
 🔑 MinIO Keygenerator
 ===
 
+[![Go Report Card](https://goreportcard.com/badge/github.com/iwittkau/minio-keygen)](https://goreportcard.com/report/github.com/iwittkau/minio-keygen)
+
 This is a simple [MinIO](https://min.io) Access and Secret Key generator.
 
 # Why?
