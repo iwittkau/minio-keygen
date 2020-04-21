@@ -55,7 +55,7 @@ func usage() {
 		info, ok = debug.ReadBuildInfo()
 		ver      = devVersion
 	)
-	if !ok {
+	if ok {
 		ver = info.Main.Version
 	}
 	fmt.Printf(about, ver, runtime.Version())
