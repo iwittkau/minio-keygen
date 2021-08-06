@@ -19,7 +19,8 @@ This generator uses Go's `crypto/rand` which implements a cryptographically secu
 
 ```
 cd ~
-GO111MODULE=on go get -u github.com/iwittkau/minio-keygen
+GO111MODULE=on
+go get -u github.com/iwittkau/minio-keygen
 ```
 
 # Usage
