@@ -17,45 +17,34 @@ const (
 
 	devVersion = "dev"
 
+	envTemplate = "MINIO_ACCESS_KEY=%s\nMINIO_SECRET_KEY=%s\n"
+
 	about = `minio-keygen (%s, %s)
-Generates a MinIO access key and secret. You can redirect the output into an .env file.
+Generates a MinIO access key and secret.You can redirect the output into an .env file.
 `
 )
 
 func main() {
-
 	flag.Usage = usage
 	flag.Parse()
-	var (
-		rawKey    = make([]byte, keyLen)
-		rawSecret = make([]byte, secretLen)
-		err       error
-	)
-	_, err = rand.Read(rawKey)
-	if err != nil {
+
+	rawKey := make([]byte, keyLen)
+	if _, err := rand.Read(rawKey); err != nil {
 		panic(err)
 	}
 
-	_, err = rand.Read(rawSecret)
-	if err != nil {
+	rawSecret := make([]byte, secretLen)
+	if _, err := rand.Read(rawSecret); err != nil {
 		panic(err)
 	}
 
-	enc := base64.URLEncoding.WithPadding(pad)
-
-	fmt.Printf(
-		"MINIO_ACCESS_KEY=%s\nMINIO_SECRET_KEY=%s\n",
-		strings.ToUpper(enc.EncodeToString(rawKey)),
-		enc.EncodeToString(rawSecret),
-	)
+	enc := base64.URLEncoding.WithPadding(pad).EncodeToString
+	fmt.Printf(envTemplate, strings.ToUpper(enc(rawKey)), enc(rawSecret))
 }
 
 func usage() {
-	var (
-		info, ok = debug.ReadBuildInfo()
-		ver      = devVersion
-	)
-	if ok {
+	ver := devVersion
+	if info, ok := debug.ReadBuildInfo(); ok {
 		ver = info.Main.Version
 	}
 	fmt.Printf(about, ver, runtime.Version())
