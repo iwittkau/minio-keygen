@@ -20,7 +20,7 @@ const (
 	envTemplate = "MINIO_ROOT_USER=%s\nMINIO_ROOT_PASSWORD=%s\n"
 
 	about = `minio-keygen (%s, %s)
-Generates a MinIO access key and secret.You can redirect the output into an .env file.
+Generates a MinIO access key and secret. You can redirect the output into an .env file.
 `
 )
 
